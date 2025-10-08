@@ -11,10 +11,11 @@ size = Vector2(645, 123)
 [node name="TestLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_paw1w")]
-position = Vector2(353, 418)
+position = Vector2(140, -630)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(358, 509)
+position = Vector2(575, 670)
+scale = Vector2(2.12, 1)
 collision_layer = 128
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_paw1w")
@@ -28,7 +29,8 @@ position = Vector2(-5.5, -1.5)
 shape = SubResource("RectangleShape2D_paw1w")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(829, 250)
+position = Vector2(254, 589)
+scale = Vector2(0.359064, 1.47174)
 collision_layer = 128
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_paw1w")
@@ -38,5 +40,50 @@ scale = Vector2(4.97146, 1.00276)
 texture = ExtResource("1_2venv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-5.5, -1.5)
+shape = SubResource("RectangleShape2D_paw1w")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(346, 457)
+scale = Vector2(0.359064, 1.47174)
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_paw1w")
+
+[node name="Floor" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(4.97146, 1.00276)
+texture = ExtResource("1_2venv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-5.5, -1.5)
+shape = SubResource("RectangleShape2D_paw1w")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(422, 341)
+scale = Vector2(0.359064, 1.47174)
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_paw1w")
+
+[node name="Floor" type="Sprite2D" parent="StaticBody2D4"]
+scale = Vector2(4.97146, 1.00276)
+texture = ExtResource("1_2venv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-5.5, -1.5)
+shape = SubResource("RectangleShape2D_paw1w")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(504, 192)
+scale = Vector2(0.359064, 1.47174)
+collision_layer = 128
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_paw1w")
+
+[node name="Floor" type="Sprite2D" parent="StaticBody2D5"]
+scale = Vector2(4.97146, 1.00276)
+texture = ExtResource("1_2venv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
 position = Vector2(-5.5, -1.5)
 shape = SubResource("RectangleShape2D_paw1w")
