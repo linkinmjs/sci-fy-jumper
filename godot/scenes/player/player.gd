@@ -91,7 +91,7 @@ func handle_input(delta: float) -> void:
 	else:
 		direction = 0
 
-	# Actualizar "facing" si hubo dirección no nula
+	# Actualizar "facing"
 	if direction != 0:
 		facing = direction
 
