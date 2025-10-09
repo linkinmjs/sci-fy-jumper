@@ -26,14 +26,21 @@ const MAX_JUMP_POWER := 2.0
 const MIN_JUMP_POWER := 0.3
 const MAX_JUMP_HEIGHT := 250.0
 
-# --- Dirección ---
-var direction: int = 0  # -1 (izq), 0 (neutral), 1 (der)
+# --- Dirección / orientación ---
+var direction: int = 0     # -1 (izq), 0 (neutral), 1 (der)
+var facing: int = 1        # última orientación no nula; 1 der, -1 izq
 
-# --- Estados / piso ---
+# --- Suelo / colisiones ---
 var is_grounded: bool = false
 var landed_this_frame: bool = false
 var impact_speed_y: float = 0.0
 const SPLAT_IMPACT_THRESHOLD := 550.0
+
+# --- Disparo ---
+const SHOOT_DURATION: float = 1
+var shoot_time_left: float = 0.0
+var shoot_pressed: bool = false
+var shoot_just: bool = false
 
 # --- Inputs ---
 var left: bool = false
@@ -44,16 +51,20 @@ var jump: bool = false
 @onready var splat_timer: Timer = $SplatTimer
 @onready var debug_label: Label = $DebugLabel
 
-
 func _ready() -> void:
+	# por si se pierde la conexión de la señal
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
 
 func _physics_process(delta: float) -> void:
 	handle_input(delta)
 
 	# Si estoy en un estado de suelo y NO hay piso, paso a FALLING antes de aplicar gravedad
-	if state in [PlayerState.IDLE, PlayerState.WALKING] and not is_on_floor():
+	if state in [PlayerState.IDLE, PlayerState.WALKING, PlayerState.SHOOTING_IDLE, PlayerState.SHOOTING_WALKING] and not is_on_floor():
 		state = PlayerState.FALLING
+
+	# avanzar reloj de disparo
+	if shoot_time_left > 0.0:
+		shoot_time_left -= delta
 
 	apply_gravity(delta)
 	move_character()
@@ -62,15 +73,17 @@ func _physics_process(delta: float) -> void:
 	update_debug_info()
 
 func handle_input(delta: float) -> void:
-	left = Input.is_action_pressed("left")
+	left  = Input.is_action_pressed("left")
 	right = Input.is_action_pressed("right")
-	jump = Input.is_action_pressed("jump")
+	jump  = Input.is_action_pressed("jump")
+	shoot_pressed = Input.is_action_pressed("shoot")
+	shoot_just    = Input.is_action_just_pressed("shoot")
 
 	if Input.is_action_just_pressed("toggle_debug"):
 		debug_visible = !debug_visible
 		debug_label.visible = debug_visible
 
-	# Dirección (la leemos siempre, incluso en SPLAT, para saber hacia dónde ir al salir)
+	# Dirección (la leemos siempre)
 	if left:
 		direction = -1
 	elif right:
@@ -78,16 +91,44 @@ func handle_input(delta: float) -> void:
 	else:
 		direction = 0
 
-	# En SPLAT no se procesa movimiento ni carga de salto
+	# Actualizar "facing" si hubo dirección no nula
+	if direction != 0:
+		facing = direction
+
+	# En SPLAT no se procesa nada más
 	if state == PlayerState.SPLAT:
 		return
 
-	# Inicio de carga de salto (desde IDLE o WALKING en el piso)
+	# --- DISPARO (en piso) ---
+	# permitimos disparar estando quieto o caminando; ignoramos en el aire
+	if shoot_just and is_grounded and state in [PlayerState.IDLE, PlayerState.WALKING]:
+		shoot_time_left = SHOOT_DURATION
+		if direction != 0:
+			state = PlayerState.SHOOTING_WALKING
+			velocity.x = direction * MOVE_SPEED
+		else:
+			state = PlayerState.SHOOTING_IDLE
+			velocity.x = 0
+		return
+
+	# Mientras dure el disparo, mantenemos la intención:
+	if state == PlayerState.SHOOTING_IDLE:
+		velocity.x = 0
+		return
+	if state == PlayerState.SHOOTING_WALKING:
+		velocity.x = direction * MOVE_SPEED
+		# si el jugador suelta dirección durante el disparo, queda en shooting_idle
+		if direction == 0:
+			state = PlayerState.SHOOTING_IDLE
+		return
+
+	# --- SALTO CARGADO ---
+	# Inicio de carga (desde IDLE/WALKING en el piso)
 	if state in [PlayerState.IDLE, PlayerState.WALKING] and jump and is_grounded:
 		state = PlayerState.CHARGING
 		velocity.x = 0  # frena inmediatamente
 
-	# Mientras cargo el salto, bloqueo movimiento lateral
+	# Mientras cargo, bloqueo lateral
 	if state == PlayerState.CHARGING:
 		velocity.x = 0
 		if jump:
@@ -98,7 +139,7 @@ func handle_input(delta: float) -> void:
 			start_jump()
 		return
 
-	# Caminar / Idle (solo si estoy en el piso)
+	# --- CAMINAR / IDLE ---
 	if is_grounded and state in [PlayerState.IDLE, PlayerState.WALKING]:
 		if direction != 0:
 			state = PlayerState.WALKING
@@ -121,7 +162,7 @@ func apply_gravity(delta: float) -> void:
 			velocity.y = MAX_FALL_SPEED
 
 func move_character() -> void:
-	var pre_velocity := velocity  # velocidad ANTES de moverse (para medir impacto)
+	var pre_velocity := velocity  # para medir impacto
 	move_and_slide()
 
 	# piso actual y detección de aterrizaje
@@ -129,18 +170,17 @@ func move_character() -> void:
 	is_grounded = is_on_floor()
 	landed_this_frame = (not prev_grounded) and is_grounded
 
-	# velocidad de impacto vertical (lo que traías antes de colisionar)
+	# velocidad de impacto vertical (antes de colisionar)
 	impact_speed_y = absf(pre_velocity.y)
 
-	# Si quedé en el aire y no estoy en JUMPING ni SPLAT (p.ej. me caí de un borde), aseguro FALLING
-	if not is_grounded and state != PlayerState.JUMPING and state != PlayerState.SPLAT:
+	# si quedé en el aire y no estoy en JUMPING ni SPLAT, aseguro FALLING
+	if not is_grounded and state not in [PlayerState.JUMPING, PlayerState.SPLAT]:
 		state = PlayerState.FALLING
 
-	# Rebote lateral en el aire
+	# rebote lateral en el aire
 	for i in range(get_slide_collision_count()):
 		var collision := get_slide_collision(i)
 		var normal := collision.get_normal()
-
 		if not is_grounded and absf(normal.x) > 0.9:
 			if absf(pre_velocity.x) < 1.0:
 				velocity.x = 80.0 * -signf(normal.x)
@@ -154,7 +194,7 @@ func handle_state(delta: float) -> void:
 	if state == PlayerState.JUMPING and velocity.y > 0.0:
 		state = PlayerState.FALLING
 
-	# Aterrizaje: solo reaccionar el frame en que tocamos suelo
+	# Aterrizaje: solo el frame que tocamos suelo
 	if landed_this_frame and state in [PlayerState.FALLING, PlayerState.JUMPING]:
 		if impact_speed_y > SPLAT_IMPACT_THRESHOLD:
 			state = PlayerState.SPLAT
@@ -163,6 +203,7 @@ func handle_state(delta: float) -> void:
 			if splat_timer:
 				splat_timer.start()
 		else:
+			# si venía disparando en el aire, al caer lo ignoramos y volvemos a base
 			if direction != 0:
 				state = PlayerState.WALKING
 				velocity.x = direction * MOVE_SPEED
@@ -170,16 +211,37 @@ func handle_state(delta: float) -> void:
 				state = PlayerState.IDLE
 				velocity.x = 0.0
 
-	# Mientras esté en SPLAT: inmóvil; si pierde piso por algo, vuelve a caer
+	# BLOQUE SPLAT: inmóvil y salida defensiva
 	if state == PlayerState.SPLAT:
 		velocity.x = 0.0
 		velocity.y = 0.0
 		if not is_grounded:
 			state = PlayerState.FALLING
+			return
+		# si terminó el timer, salir según input
+		if splat_timer == null or splat_timer.is_stopped():
+			if direction != 0:
+				state = PlayerState.WALKING
+				velocity.x = direction * MOVE_SPEED
+			else:
+				state = PlayerState.IDLE
+				velocity.x = 0.0
 		return
 
+	# Fin de disparo por tiempo
+	if state in [PlayerState.SHOOTING_IDLE, PlayerState.SHOOTING_WALKING] and shoot_time_left <= 0.0:
+		if is_grounded:
+			if direction != 0:
+				state = PlayerState.WALKING
+				velocity.x = direction * MOVE_SPEED
+			else:
+				state = PlayerState.IDLE
+				velocity.x = 0.0
+		else:
+			state = PlayerState.FALLING
+
 func _on_splat_timer_timeout() -> void:
-	# Salir de SPLAT según input y piso
+	# salida inmediata de SPLAT (handle_state también contempla salida defensiva)
 	if state == PlayerState.SPLAT:
 		if is_grounded and direction != 0:
 			state = PlayerState.WALKING
@@ -188,7 +250,10 @@ func _on_splat_timer_timeout() -> void:
 			state = PlayerState.IDLE
 			velocity.x = 0.0
 
-func add_animation() -> void:		
+func add_animation() -> void:
+	# flip por orientación
+	animated_sprite_2d.flip_h = (facing == -1)
+
 	match state:
 		PlayerState.IDLE:
 			animated_sprite_2d.play("idle")
@@ -202,10 +267,14 @@ func add_animation() -> void:
 			animated_sprite_2d.play("falling")
 		PlayerState.SPLAT:
 			animated_sprite_2d.play("splat")
+		PlayerState.SHOOTING_IDLE:
+			animated_sprite_2d.play("shooting_idle")
+		PlayerState.SHOOTING_WALKING:
+			animated_sprite_2d.play("shooting_walking")
 		_:
 			pass
 
-# Debug
+# --- Debug ---
 func update_debug_info() -> void:
 	var lines := []
 	lines.append("STATE: %s" % PlayerState.keys()[state])
@@ -213,6 +282,7 @@ func update_debug_info() -> void:
 	lines.append("POS: (%.0f, %.0f)" % [position.x, position.y])
 	lines.append("GROUND: %s (landed:%s)" % [is_grounded, landed_this_frame])
 	lines.append("IMPACT_Y: %.1f (thr:%.0f)" % [impact_speed_y, SPLAT_IMPACT_THRESHOLD])
-	lines.append("DIR: %d" % direction)
+	lines.append("DIR: %d  FACING: %d" % [direction, facing])
 	lines.append("JUMP_PWR: %.2f" % jump_power)
+	lines.append("SHOOT_T: %.2f" % shoot_time_left)
 	debug_label.text = "\n".join(lines)

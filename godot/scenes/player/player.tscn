@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ctnmvkv4iauvv"]
+[gd_scene load_steps=34 format=3 uid="uid://ctnmvkv4iauvv"]
 
 [ext_resource type="Texture2D" uid="uid://cuvqfkcihrrfo" path="res://assets/Main_Characters/Char_Boy.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b5v8ol0ef2k01" path="res://scenes/player/player.gd" id="1_dovo2"]
@@ -58,14 +58,6 @@ region = Rect2(192, 192, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnsyf"]
 atlas = ExtResource("1_8afob")
 region = Rect2(240, 192, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
-atlas = ExtResource("1_8afob")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
-atlas = ExtResource("1_8afob")
-region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
 atlas = ExtResource("1_8afob")
@@ -201,12 +193,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_007i1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6cv16")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_j4nxn")
 }, {
 "duration": 1.0,
@@ -278,7 +264,7 @@ script = ExtResource("1_dovo2")
 position = Vector2(0, -31)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_x7p2l")
-animation = &"idle"
+animation = &"shooting_walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -34)
