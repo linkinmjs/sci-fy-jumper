@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="Sci-fy Jumper"
-run/main_scene="uid://df3doeo6sq8ge"
+run/main_scene="uid://driv34882m0nl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=576
+window/size/viewport_height=324
 window/stretch/mode="canvas_items"
 
 [input]

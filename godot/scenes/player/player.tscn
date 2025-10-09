@@ -253,7 +253,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
-size = Vector2(31, 66)
+size = Vector2(8.64296, 24.5043)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
@@ -261,22 +261,20 @@ collision_mask = 128
 script = ExtResource("1_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -31)
-scale = Vector2(3, 3)
+position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_x7p2l")
 animation = &"shooting_walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -34)
+position = Vector2(0, -12)
+scale = Vector2(1.21732, 0.979249)
 shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="SplatTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="DebugLabel" type="Label" parent="."]
-offset_left = -39.0
-offset_top = -246.0
-offset_right = 1.0
-offset_bottom = -223.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
+offset_left = -15.0
+offset_top = -193.0
+offset_right = 25.0
+offset_bottom = -170.0
