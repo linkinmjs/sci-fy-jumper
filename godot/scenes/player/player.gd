@@ -6,7 +6,9 @@ enum PlayerState {
 	JUMPING,
 	FALLING,
 	SPLAT,
-	WALKING
+	WALKING,
+	SHOOTING_IDLE,
+	SHOOTING_WALKING,
 }
 
 var state : PlayerState = PlayerState.IDLE
@@ -41,6 +43,7 @@ var jump: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var splat_timer: Timer = $SplatTimer
 @onready var debug_label: Label = $DebugLabel
+
 
 func _ready() -> void:
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
@@ -185,16 +188,24 @@ func _on_splat_timer_timeout() -> void:
 			state = PlayerState.IDLE
 			velocity.x = 0.0
 
-func add_animation() -> void:
+func add_animation() -> void:		
 	match state:
 		PlayerState.IDLE:
 			animated_sprite_2d.play("idle")
 		PlayerState.WALKING:
 			animated_sprite_2d.play("walking")
+		PlayerState.CHARGING:
+			animated_sprite_2d.play("charging")
+		PlayerState.JUMPING:
+			animated_sprite_2d.play("jumping")
+		PlayerState.FALLING:
+			animated_sprite_2d.play("falling")
+		PlayerState.SPLAT:
+			animated_sprite_2d.play("splat")
 		_:
-			pass  # agregá anims para jump/fall/splat si las tenés
+			pass
 
-# --- Debug ---
+# Debug
 func update_debug_info() -> void:
 	var lines := []
 	lines.append("STATE: %s" % PlayerState.keys()[state])
