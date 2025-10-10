@@ -12,7 +12,7 @@ enum PlayerState {
 }
 
 var state : PlayerState = PlayerState.IDLE
-var debug_visible: bool = true
+var debug_visible: bool = false
 
 # --- Movimiento ---
 const GRAVITY := 800.0
@@ -82,7 +82,10 @@ func handle_input(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_debug"):
 		debug_visible = !debug_visible
 		debug_label.visible = debug_visible
-
+	
+	if debug_visible and Input.is_action_just_pressed("left_click"):
+		global_position = get_global_mouse_position()
+	
 	# Dirección (la leemos siempre)
 	if left:
 		direction = -1

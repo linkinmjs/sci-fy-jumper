@@ -274,6 +274,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 one_shot = true
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 offset_left = -15.0
 offset_top = -193.0
 offset_right = 25.0
