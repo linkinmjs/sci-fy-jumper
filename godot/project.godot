@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Sci-fy Jumper"
-run/main_scene="uid://driv34882m0nl"
+run/main_scene="uid://chwle8ow87ia8"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalSignals="*res://global_signals.gd"
+GameManager="*res://game_manager.gd"
 
 [display]
 
