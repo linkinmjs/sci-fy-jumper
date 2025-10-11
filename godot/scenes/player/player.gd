@@ -9,6 +9,7 @@ enum PlayerState {
 	WALKING,
 	SHOOTING_IDLE,
 	SHOOTING_WALKING,
+	HITTED
 }
 
 var state : PlayerState = PlayerState.IDLE
