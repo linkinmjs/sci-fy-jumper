@@ -3,7 +3,7 @@ extends Node2D
 @export var start_level_scene: PackedScene
 @export var end_level_scene: PackedScene
 @export var level_scenes: Array[PackedScene]
-@export var level_number: int = 5
+@export var level_number: int = 1
 
 @onready var complete_level_node: Node2D = $Level
 @onready var path_camera: Path2D = $PathCamera
@@ -11,6 +11,7 @@ extends Node2D
 const LEVEL_WIDTH: int = 576
 
 func _ready() -> void:
+	level_number = GameManager.actual_level
 	build_level(level_number)
 
 func build_level(level_num: int) -> void:
