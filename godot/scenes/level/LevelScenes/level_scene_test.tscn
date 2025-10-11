@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://brk5un55qavuj"]
+[gd_scene load_steps=5 format=4 uid="uid://brk5un55qavuj"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_opnca"]
 [ext_resource type="PackedScene" uid="uid://ctnmvkv4iauvv" path="res://scenes/player/player.tscn" id="2_opnca"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_r2aeb"]
+[ext_resource type="PackedScene" uid="uid://cjfym45np8g35" path="res://scenes/laser_shoot/laser_shoot.tscn" id="4_apd0i"]
 
 [node name="LevelSceneTest" type="TileMapLayer"]
 texture_filter = 1
@@ -14,3 +15,6 @@ position = Vector2(97, 272)
 
 [node name="EnemySpider" parent="." instance=ExtResource("3_r2aeb")]
 position = Vector2(362, 86)
+
+[node name="LaserShoot" parent="." instance=ExtResource("4_apd0i")]
+position = Vector2(-127, 230)

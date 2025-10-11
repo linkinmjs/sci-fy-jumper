@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://ctnmvkv4iauvv"]
+[gd_scene load_steps=39 format=3 uid="uid://ctnmvkv4iauvv"]
 
 [ext_resource type="Texture2D" uid="uid://cuvqfkcihrrfo" path="res://assets/Main_Characters/Char_Boy.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b5v8ol0ef2k01" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="PackedScene" uid="uid://cjfym45np8g35" path="res://scenes/laser_shoot/laser_shoot.tscn" id="2_gmlin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
 atlas = ExtResource("1_8afob")
@@ -18,6 +19,18 @@ region = Rect2(240, 144, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
 atlas = ExtResource("1_8afob")
 region = Rect2(192, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
+atlas = ExtResource("1_8afob")
+region = Rect2(240, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
+atlas = ExtResource("1_8afob")
+region = Rect2(288, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mf0n"]
+atlas = ExtResource("1_8afob")
+region = Rect2(336, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
 atlas = ExtResource("1_8afob")
@@ -145,6 +158,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_007i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cv16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mf0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cv16")
+}],
+"loop": true,
+"name": &"hitted",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dovo2")
 }, {
 "duration": 1.0,
@@ -255,15 +285,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(8.64296, 24.5043)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
+size = Vector2(8, 19)
+
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 collision_mask = 128
 script = ExtResource("1_dovo2")
+laser_scene = ExtResource("2_gmlin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_x7p2l")
-animation = &"shooting_walking"
+animation = &"shooting_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
@@ -279,3 +313,15 @@ offset_left = -15.0
 offset_top = -193.0
 offset_right = 25.0
 offset_bottom = -170.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_gmlin")
+debug_color = Color(0.868422, 0.340441, 0.248201, 0.42)
+
+[node name="LaserMarker" type="Marker2D" parent="."]
+position = Vector2(14, -14)

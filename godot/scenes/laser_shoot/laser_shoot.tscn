@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjfym45np8g35"]
+
+[ext_resource type="Texture2D" uid="uid://dvxgcecde5rtd" path="res://assets/Main_Characters/Char_fire.png" id="1_g0qsb"]
+[ext_resource type="Script" uid="uid://3nf2dutyke1s" path="res://scenes/laser_shoot/laser_shoot.gd" id="2_v2xsq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2xsq"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g87oy"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg5wj"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnbv6"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkfao"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fj0u"]
+atlas = ExtResource("1_g0qsb")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gjuf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2xsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g87oy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg5wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnbv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkfao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fj0u")
+}],
+"loop": false,
+"name": &"impact",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6hle"]
+size = Vector2(7, 3)
+
+[node name="LaserShoot" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(3, -7)
+sprite_frames = SubResource("SpriteFrames_5gjuf")
+animation = &"impact"
+autoplay = "idle"
+script = ExtResource("2_v2xsq")
+
+[node name="ImpactArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 143
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactArea"]
+position = Vector2(2.5, 5.5)
+shape = SubResource("RectangleShape2D_c6hle")
+debug_color = Color(0.667908, 0.354393, 0.923852, 0.42)

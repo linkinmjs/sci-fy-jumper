@@ -40,7 +40,6 @@ const SPLAT_IMPACT_THRESHOLD := 550.0
 # --- Disparo ---
 const SHOOT_DURATION: float = 1
 var shoot_time_left: float = 0.0
-var shoot_pressed: bool = false
 var shoot_just: bool = false
 
 # --- Inputs ---
@@ -48,13 +47,18 @@ var left: bool = false
 var right: bool = false
 var jump: bool = false
 
+@export var laser_scene: PackedScene
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hurtbox: Area2D = $Hurtbox
 @onready var splat_timer: Timer = $SplatTimer
 @onready var debug_label: Label = $DebugLabel
+@onready var laser_marker: Marker2D = $LaserMarker
 
 func _ready() -> void:
-	# por si se pierde la conexión de la señal
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
+	hurtbox.body_entered.connect(_on_body_entered)
+	
 
 func _physics_process(delta: float) -> void:
 	handle_input(delta)
@@ -77,7 +81,6 @@ func handle_input(delta: float) -> void:
 	left  = Input.is_action_pressed("left")
 	right = Input.is_action_pressed("right")
 	jump  = Input.is_action_pressed("jump")
-	shoot_pressed = Input.is_action_pressed("shoot")
 	shoot_just    = Input.is_action_just_pressed("shoot")
 
 	if Input.is_action_just_pressed("toggle_debug"):
@@ -106,6 +109,7 @@ func handle_input(delta: float) -> void:
 	# --- DISPARO (en piso) ---
 	# permitimos disparar estando quieto o caminando; ignoramos en el aire
 	if shoot_just and is_grounded and state in [PlayerState.IDLE, PlayerState.WALKING]:
+		shoot_laser()
 		shoot_time_left = SHOOT_DURATION
 		if direction != 0:
 			state = PlayerState.SHOOTING_WALKING
@@ -152,6 +156,11 @@ func handle_input(delta: float) -> void:
 			state = PlayerState.IDLE
 			velocity.x = 0
 
+func shoot_laser() -> void:
+	var laser = laser_scene.instantiate()
+	laser.global_position = laser_marker.global_position
+	add_sibling(laser)
+
 func start_jump() -> void:
 	var power: float = clampf(jump_power, MIN_JUMP_POWER, MAX_JUMP_POWER)
 	jump_power = 0.0
@@ -194,6 +203,12 @@ func move_character() -> void:
 			break
 
 func handle_state(delta: float) -> void:
+	if state == PlayerState.HITTED:
+		velocity.x = 0.0
+		velocity.y = 0.0
+		await get_tree().create_timer(1).timeout
+		state = PlayerState.IDLE
+		
 	# Aire: JUMPING -> FALLING
 	if state == PlayerState.JUMPING and velocity.y > 0.0:
 		state = PlayerState.FALLING
@@ -244,16 +259,6 @@ func handle_state(delta: float) -> void:
 		else:
 			state = PlayerState.FALLING
 
-func _on_splat_timer_timeout() -> void:
-	# salida inmediata de SPLAT (handle_state también contempla salida defensiva)
-	if state == PlayerState.SPLAT:
-		if is_grounded and direction != 0:
-			state = PlayerState.WALKING
-			velocity.x = direction * MOVE_SPEED
-		else:
-			state = PlayerState.IDLE
-			velocity.x = 0.0
-
 func add_animation() -> void:
 	# flip por orientación
 	animated_sprite_2d.flip_h = (facing == -1)
@@ -275,8 +280,25 @@ func add_animation() -> void:
 			animated_sprite_2d.play("shooting_idle")
 		PlayerState.SHOOTING_WALKING:
 			animated_sprite_2d.play("shooting_walking")
+		PlayerState.HITTED:
+			animated_sprite_2d.play("hitted")
 		_:
 			pass
+
+func _on_body_entered(body: Node2D) -> void:
+	#await get_tree().create_timer(1).timeout
+	state = PlayerState.HITTED
+	pass
+
+func _on_splat_timer_timeout() -> void:
+	# salida inmediata de SPLAT (handle_state también contempla salida defensiva)
+	if state == PlayerState.SPLAT:
+		if is_grounded and direction != 0:
+			state = PlayerState.WALKING
+			velocity.x = direction * MOVE_SPEED
+		else:
+			state = PlayerState.IDLE
+			velocity.x = 0.0
 
 # --- Debug ---
 func update_debug_info() -> void:

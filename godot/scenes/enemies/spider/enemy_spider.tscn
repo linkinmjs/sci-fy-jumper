@@ -104,6 +104,8 @@ shape = SubResource("RectangleShape2D_5ka0v")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -9)
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_3g4sx")

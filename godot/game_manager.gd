@@ -1,11 +1,16 @@
 extends Node
 
+var actual_life: int = 10
+var actual_energy: int = 5
 var actual_level: int = 1
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+signal player_is_hitted
+signal laser_is_shooted
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func hit_player() -> void:
+	emit_signal("player_is_hitted")
+	actual_life -= 1
+	
+func shoot_laser() -> void:
+	emit_signal("laser_is_shooted")
+	actual_energy -= 1
