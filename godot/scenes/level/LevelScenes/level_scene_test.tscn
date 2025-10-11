@@ -17,4 +17,4 @@ position = Vector2(97, 272)
 position = Vector2(362, 86)
 
 [node name="LaserShoot" parent="." instance=ExtResource("4_apd0i")]
-position = Vector2(-127, 230)
+position = Vector2(66, 85)

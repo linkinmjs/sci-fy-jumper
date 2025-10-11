@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var rightray: RayCast2D = $rightray
 @onready var lefttwallray: RayCast2D = $lefttwallray
 @onready var rightwallray: RayCast2D = $rightwallray
+@onready var hurtbox: Area2D = $Hurtbox
 
 @export_range(-1, 1) var dir: int = 1
 
@@ -14,6 +15,7 @@ var speed: float = 35.0
 var gravity: int = 15
 
 func _ready() -> void:
+	hurtbox.area_entered.connect(_on_area_entered)
 	if dir == 0:
 		dir = 1
 		sprite.flip_h = false if dir == 1 else true
@@ -35,3 +37,6 @@ func _physics_process(delta: float) -> void:
 func _wait_dir_change(desire_dir: int) -> void:
 	await get_tree().create_timer(0.5).timeout
 	dir = desire_dir
+
+func _on_area_entered(area: Area2D) -> void:
+	print("TODO: add damage")
