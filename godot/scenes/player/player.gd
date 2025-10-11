@@ -157,8 +157,22 @@ func handle_input(delta: float) -> void:
 			velocity.x = 0
 
 func shoot_laser() -> void:
-	var laser = laser_scene.instantiate()
-	laser.global_position = laser_marker.global_position
+	# 1) instanciar
+	var laser: Node = laser_scene.instantiate()
+	
+	# 2) calcular posición de spawn usando el marker,
+	#    pero espejando el offset cuando miramos a la izquierda.
+	var local_offset: Vector2 = laser_marker.global_position - global_position
+	local_offset.x *= facing  # espejo horizontal si facing = -1
+	var spawn_pos: Vector2 = global_position + local_offset
+	laser.global_position = spawn_pos
+	
+	# 3) pasar dirección al láser (1 der, -1 izq) y orientar su sprite
+	#    (usa el campo "dir" que agregamos en el láser)
+	if "dir" in laser:
+		laser.dir = facing
+	
+	# 4) agregar al mismo padre que el player (hermano en la escena)
 	add_sibling(laser)
 
 func start_jump() -> void:
