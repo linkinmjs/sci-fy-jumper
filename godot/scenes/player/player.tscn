@@ -325,3 +325,10 @@ debug_color = Color(0.868422, 0.340441, 0.248201, 0.42)
 
 [node name="LaserMarker" type="Marker2D" parent="."]
 position = Vector2(14, -14)
+
+[node name="HurtFreezeTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="InvulnTimer" type="Timer" parent="."]
+one_shot = true
