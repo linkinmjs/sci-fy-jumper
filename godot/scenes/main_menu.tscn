@@ -1,15 +1,41 @@
 [gd_scene load_steps=8 format=4 uid="uid://dbed48im5hs1e"]
 
 [ext_resource type="TileSet" uid="uid://76g181rh3hvl" path="res://sources/tileset_ui.tres" id="1_06t4h"]
-[ext_resource type="Script" uid="uid://ds86lcwt8dapm" path="res://main_menu.gd" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://ds86lcwt8dapm" path="res://scenes/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="FontFile" uid="uid://dggc1fkrpmy11" path="res://assets/fonts/Deadknight.otf" id="2_7vrkn"]
 [ext_resource type="FontFile" uid="uid://dlj2630yfhkun" path="res://assets/fonts/{PixelFlag}.ttf" id="4_jix8l"]
 
-[sub_resource type="Animation" id="Animation_jix8l"]
-resource_name = "idle"
-
 [sub_resource type="Animation" id="Animation_glbon"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/VBoxContainer/PressStartLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jix8l"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/VBoxContainer/PressStartLabel:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1.93187, 0.466516, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.298039), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nlkkf"]
 _data = {
@@ -54,6 +80,7 @@ horizontal_alignment = 1
 
 [node name="PressStartLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_jix8l")
 theme_override_font_sizes/font_size = 27
 text = "Press [E] to start or [ESC] to quit"
