@@ -57,8 +57,7 @@ var jump: bool = false
 
 func _ready() -> void:
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
-	hurtbox.body_entered.connect(_on_body_entered)
-	
+	hurtbox.area_entered.connect(_on_area_entered)
 
 func _physics_process(delta: float) -> void:
 	handle_input(delta)
@@ -299,10 +298,9 @@ func add_animation() -> void:
 		_:
 			pass
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	#await get_tree().create_timer(1).timeout
 	state = PlayerState.HITTED
-	pass
 
 func _on_splat_timer_timeout() -> void:
 	# salida inmediata de SPLAT (handle_state también contempla salida defensiva)
