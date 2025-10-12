@@ -1,7 +1,35 @@
-[gd_scene load_steps=15 format=3 uid="uid://pi8waxc4c7bo"]
+[gd_scene load_steps=22 format=3 uid="uid://pi8waxc4c7bo"]
 
 [ext_resource type="Script" uid="uid://b78kyha1xxrv7" path="res://scenes/enemies/spider/enemy_spider.gd" id="1_xpp31"]
 [ext_resource type="Texture2D" uid="uid://cike1hcswjpfo" path="res://assets/Enemies/Alien2_fixed.png" id="2_t3dm1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt6w5"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rhml"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ola2q"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j1bn"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpp31"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3dm1"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncsaa"]
+atlas = ExtResource("2_t3dm1")
+region = Rect2(336, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apd0i"]
 atlas = ExtResource("2_t3dm1")
@@ -41,6 +69,37 @@ region = Rect2(192, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c8etm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt6w5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rhml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ola2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j1bn")
+}],
+"loop": false,
+"name": &"dying",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpp31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3dm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncsaa")
+}],
+"loop": false,
+"name": &"hitted",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_apd0i")
@@ -96,8 +155,10 @@ script = ExtResource("1_xpp31")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pivot"]
 position = Vector2(6, -24)
 sprite_frames = SubResource("SpriteFrames_c8etm")
-animation = &"idle"
-frame_progress = 0.0883488
+animation = &"dying"
+autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
