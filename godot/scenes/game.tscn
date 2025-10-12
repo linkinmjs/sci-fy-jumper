@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://chwle8ow87ia8"]
+[gd_scene load_steps=18 format=4 uid="uid://chwle8ow87ia8"]
 
 [ext_resource type="Script" uid="uid://csrqqjykkwiyv" path="res://scenes/game.gd" id="1_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dhnjwkuiy0r83" path="res://scenes/level/LevelScenes/start_level_scene.tscn" id="2_ca42v"]
@@ -15,6 +15,7 @@
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="13_qnb83"]
 [ext_resource type="TileSet" uid="uid://76g181rh3hvl" path="res://sources/tileset_ui.tres" id="14_ir15t"]
 [ext_resource type="PackedScene" uid="uid://pnhfryt22gxf" path="res://scenes/UI/player_card_ui.tscn" id="15_suyxu"]
+[ext_resource type="PackedScene" uid="uid://bxj1rck3olkpy" path="res://scenes/UI/pause_menu.tscn" id="16_ca42v"]
 
 [sub_resource type="Curve2D" id="Curve2D_qkmgm"]
 _data = {
@@ -27,6 +28,8 @@ script = ExtResource("1_ir15t")
 start_level_scene = ExtResource("2_ca42v")
 end_level_scene = ExtResource("3_rysoc")
 level_scenes = Array[PackedScene]([ExtResource("4_ssvqc"), ExtResource("5_264po"), ExtResource("6_1kice"), ExtResource("7_5newe"), ExtResource("8_37s47"), ExtResource("9_bt5mj"), ExtResource("10_e1j6l")])
+
+[node name="PauseMenu" parent="." instance=ExtResource("16_ca42v")]
 
 [node name="Player" parent="." instance=ExtResource("11_pl11u")]
 position = Vector2(87, 181)
