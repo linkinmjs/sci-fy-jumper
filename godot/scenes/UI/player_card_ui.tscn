@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://pnhfryt22gxf"]
+[gd_scene load_steps=23 format=3 uid="uid://pnhfryt22gxf"]
 
 [ext_resource type="Texture2D" uid="uid://b7movovfo5ngm" path="res://assets/GUI/GUI_Elements.png" id="1_g2q8g"]
+[ext_resource type="Script" uid="uid://cfwyiwcmgyl77" path="res://scenes/UI/player_card_ui.gd" id="1_setfj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_setfj"]
 atlas = ExtResource("1_g2q8g")
@@ -83,7 +84,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3us8g")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
@@ -133,13 +134,14 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qh1fi")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
 [node name="PlayerCardUI" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_setfj")
 
 [node name="Card" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_setfj")
@@ -151,11 +153,7 @@ texture = SubResource("AtlasTexture_tvlld")
 [node name="Health" type="AnimatedSprite2D" parent="."]
 position = Vector2(14, -8.5)
 sprite_frames = SubResource("SpriteFrames_sj2ha")
-frame = 4
-frame_progress = 0.729996
 
 [node name="Energy" type="AnimatedSprite2D" parent="."]
 position = Vector2(14, 7.5)
 sprite_frames = SubResource("SpriteFrames_i2xq3")
-frame = 1
-frame_progress = 0.576156

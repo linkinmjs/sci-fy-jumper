@@ -121,7 +121,7 @@ func handle_input(delta: float) -> void:
 		return
 
 	# --- DISPARO (en piso) ---
-	if shoot_just and is_grounded and state in [PlayerState.IDLE, PlayerState.WALKING]:
+	if shoot_just and is_grounded and state in [PlayerState.IDLE, PlayerState.WALKING] and GameManager.actual_energy >= 0:
 		shoot_laser()
 		shoot_time_left = SHOOT_DURATION
 		if direction != 0:
@@ -167,6 +167,7 @@ func handle_input(delta: float) -> void:
 			velocity.x = 0
 
 func shoot_laser() -> void:
+	GameManager.shoot_laser()
 	var laser: Node = laser_scene.instantiate()
 	var local_offset: Vector2 = laser_marker.global_position - global_position
 	local_offset.x *= facing
