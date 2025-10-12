@@ -7,12 +7,15 @@ extends Node2D
 
 @onready var complete_level_node: Node2D = $Level
 @onready var path_camera: Path2D = $PathCamera
+@onready var game_music: AudioStreamPlayer = $Audios/GameMusic
 
 const LEVEL_WIDTH: int = 576
 
 func _ready() -> void:
 	level_number = GameManager.actual_level
+	game_music.play(0.0)
 	build_level(level_number)
+	
 
 func build_level(level_num: int) -> void:
 	# 1) limpiar nivel

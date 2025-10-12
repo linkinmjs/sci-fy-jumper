@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://chwle8ow87ia8"]
+[gd_scene load_steps=18 format=4 uid="uid://chwle8ow87ia8"]
 
 [ext_resource type="Script" uid="uid://csrqqjykkwiyv" path="res://scenes/game.gd" id="1_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dhnjwkuiy0r83" path="res://scenes/level/LevelScenes/start_level_scene.tscn" id="2_ca42v"]
@@ -15,6 +15,7 @@
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="13_qnb83"]
 [ext_resource type="PackedScene" uid="uid://3dfvu077tete" path="res://scenes/UI/ui.tscn" id="15_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxj1rck3olkpy" path="res://scenes/UI/pause_menu.tscn" id="16_ca42v"]
+[ext_resource type="AudioStream" uid="uid://dppr8kh6xly6r" path="res://assets/audios/music/game-music.mp3" id="16_rysoc"]
 
 [sub_resource type="Curve2D" id="Curve2D_qkmgm"]
 _data = {
@@ -83,3 +84,9 @@ tile_map_data = PackedByteArray("AAAFABMAAAABAAwAAAAFABIAAAABAAsAAAAFABEAAAABAAo
 tile_set = ExtResource("13_qnb83")
 
 [node name="UI" parent="." instance=ExtResource("15_ir15t")]
+
+[node name="Audios" type="Node2D" parent="."]
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="Audios"]
+stream = ExtResource("16_rysoc")
+bus = &"Music"

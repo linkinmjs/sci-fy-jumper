@@ -68,7 +68,7 @@ bus_name = "Master"
 
 [node name="Music" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Master"
+text = "Music"
 horizontal_alignment = 1
 
 [node name="MusicVolSlider" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_bl585")]
@@ -78,7 +78,7 @@ bus_name = "Music"
 
 [node name="SFX" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Master"
+text = "SFX"
 horizontal_alignment = 1
 
 [node name="SFCVolSlider" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer" instance=ExtResource("2_bl585")]

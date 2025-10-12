@@ -1,8 +1,12 @@
-[gd_scene load_steps=39 format=3 uid="uid://ctnmvkv4iauvv"]
+[gd_scene load_steps=43 format=3 uid="uid://ctnmvkv4iauvv"]
 
 [ext_resource type="Texture2D" uid="uid://cuvqfkcihrrfo" path="res://assets/Main_Characters/Char_Boy.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://b5v8ol0ef2k01" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cjfym45np8g35" path="res://scenes/laser_shoot/laser_shoot.tscn" id="2_gmlin"]
+[ext_resource type="AudioStream" uid="uid://cdj6jwaphoedw" path="res://assets/audios/sfx/hitHurt_01.wav" id="4_75vfm"]
+[ext_resource type="AudioStream" uid="uid://raw1c5n0pef5" path="res://assets/audios/sfx/jump_01_short.wav" id="5_0owmy"]
+[ext_resource type="AudioStream" uid="uid://bhyrrbscua6n3" path="res://assets/audios/sfx/laserShoot_02.wav" id="6_qek5x"]
+[ext_resource type="AudioStream" uid="uid://cquravku0i5s3" path="res://assets/audios/sfx/step.wav" id="7_0owmy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
 atlas = ExtResource("1_8afob")
@@ -333,3 +337,22 @@ one_shot = true
 
 [node name="InvulnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="HitHurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_75vfm")
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_0owmy")
+bus = &"SFX"
+
+[node name="ShootLaser" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_qek5x")
+bus = &"SFX"
+
+[node name="Step" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_0owmy")
+volume_db = 15.0
+bus = &"SFX"

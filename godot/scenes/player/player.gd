@@ -52,6 +52,16 @@ var left: bool = false
 var right: bool = false
 var jump: bool = false
 
+# --- SFX ---
+@onready var sfx_hit_hurt: AudioStreamPlayer = $SFX/HitHurt
+@onready var sfx_jump: AudioStreamPlayer = $SFX/Jump
+@onready var sfx_shoot_laser: AudioStreamPlayer = $SFX/ShootLaser
+@onready var sfx_step: AudioStreamPlayer = $SFX/Step
+
+var step_cd := 0.0
+const STEP_INTERVAL := 0.55  # acá! ajustar al ritmo de la animación
+
+# --- and the others :) ---
 @export var laser_scene: PackedScene
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -63,7 +73,6 @@ var jump: bool = false
 @onready var invuln_timer: Timer = $InvulnTimer
 
 func _ready() -> void:
-	# Timers defensivos
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
 	hurt_freeze_timer.one_shot = true
 	invuln_timer.one_shot = true
@@ -92,6 +101,14 @@ func _physics_process(delta: float) -> void:
 	handle_state(delta)
 	add_animation()
 	update_debug_info()
+	if is_grounded and absf(velocity.x) > 1.0 and state in [PlayerState.WALKING, PlayerState.SHOOTING_WALKING]:
+		step_cd -= delta
+		if step_cd <= 0.0:
+			_play_sfx(sfx_step, 0.95, 1.05)
+			step_cd = STEP_INTERVAL
+	else:
+		# reiniciamos el cooldown para que suenen pasos apenas vuelva a caminar
+		step_cd = 0.0
 
 func handle_input(delta: float) -> void:
 	left  = Input.is_action_pressed("left")
@@ -167,6 +184,7 @@ func handle_input(delta: float) -> void:
 			velocity.x = 0
 
 func shoot_laser() -> void:
+	_play_sfx(sfx_shoot_laser, 0.98, 1.02)
 	GameManager.shoot_laser()
 	var laser: Node = laser_scene.instantiate()
 	var local_offset: Vector2 = laser_marker.global_position - global_position
@@ -178,6 +196,7 @@ func shoot_laser() -> void:
 	add_sibling(laser)
 
 func start_jump() -> void:
+	_play_sfx(sfx_jump, 0.96, 1.04)
 	var power: float = clampf(jump_power, MIN_JUMP_POWER, MAX_JUMP_POWER)
 	jump_power = 0.0
 	state = PlayerState.JUMPING
@@ -291,6 +310,7 @@ func _try_enter_hurt() -> void:
 	if invulnerable:
 		return
 	# Entrar a HITTED desde cualquier estado
+	_play_sfx(sfx_hit_hurt, 0.95, 1.05)
 	state = PlayerState.HITTED
 	velocity = Vector2.ZERO
 	# cancelar disparo en curso
@@ -299,7 +319,7 @@ func _try_enter_hurt() -> void:
 	invulnerable = true
 	hurt_freeze_timer.start()
 	invuln_timer.start()
-	# (opcional) feedback visual: parpadeo
+	# parpadeo
 	animated_sprite_2d.modulate.a = 0.6
 	GameManager.hit_player()
 
@@ -319,6 +339,11 @@ func _on_invuln_timeout() -> void:
 	# Fin de i-frames
 	invulnerable = false
 	animated_sprite_2d.modulate.a = 1.0
+
+func _play_sfx(p: AudioStreamPlayer, pmin := 0.98, pmax := 1.02) -> void:
+	if p == null: return
+	p.pitch_scale = randf_range(pmin, pmax)  # leve variación para que no suene “igual”
+	p.play()
 
 func add_animation() -> void:
 	# flip por orientación
