@@ -55,7 +55,7 @@ func _wait_dir_change(desire_dir: int) -> void:
 	await get_tree().create_timer(0.3).timeout
 	dir = desire_dir
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	if not alive:
 		return
 	life -= 1

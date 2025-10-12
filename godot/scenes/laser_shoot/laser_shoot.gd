@@ -19,13 +19,13 @@ func _process(delta: float) -> void:
 		return
 	global_position.x += dir * speed * delta
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	if impacted: return
 	impacted = true
 	await get_tree().create_timer(1).timeout
 	queue_free()
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	if impacted: return
 	impacted = true
 	await get_tree().create_timer(1).timeout

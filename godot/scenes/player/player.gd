@@ -215,7 +215,7 @@ func move_character() -> void:
 			state = PlayerState.FALLING
 			break
 
-func handle_state(delta: float) -> void:
+func handle_state(_delta: float) -> void:
 	# HITTED (freeze total)
 	if state == PlayerState.HITTED:
 		velocity = Vector2.ZERO
@@ -301,6 +301,7 @@ func _try_enter_hurt() -> void:
 	invuln_timer.start()
 	# (opcional) feedback visual: parpadeo
 	animated_sprite_2d.modulate.a = 0.6
+	GameManager.hit_player()
 
 func _on_hurt_freeze_timeout() -> void:
 	# Termina el “parálisis”; elegir estado base
