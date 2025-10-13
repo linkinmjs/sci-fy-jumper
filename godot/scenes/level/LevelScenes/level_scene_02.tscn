@@ -11,22 +11,22 @@ tile_set = ExtResource("1_b1t6s")
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="RespawnMarker" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(28, 277)
+position = Vector2(33, 276)
 
 [node name="RespawnMarker2" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(165, 53)
+position = Vector2(165, 54)
 
 [node name="RespawnMarker3" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(242, 53)
+position = Vector2(239, 56)
 
 [node name="RespawnMarker4" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(305, 51)
+position = Vector2(301, 55)
 
 [node name="RespawnMarker5" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(358, 55)
+position = Vector2(359, 56)
 
 [node name="RespawnMarker6" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(433, 67)
+position = Vector2(427, 70)
 
 [node name="RespawnMarker7" parent="Checkpoints" instance=ExtResource("3_ock45")]
-position = Vector2(562, 274)
+position = Vector2(528, 275)

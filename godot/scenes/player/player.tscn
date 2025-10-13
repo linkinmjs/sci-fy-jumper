@@ -358,3 +358,5 @@ volume_db = 15.0
 bus = &"SFX"
 
 [node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -11)
+scale = Vector2(0.439999, 1)

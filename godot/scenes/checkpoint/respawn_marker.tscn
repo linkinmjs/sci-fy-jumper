@@ -6,3 +6,5 @@
 script = ExtResource("1_5gj50")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-18, 0)
+scale = Vector2(0.240001, 0.280001)
