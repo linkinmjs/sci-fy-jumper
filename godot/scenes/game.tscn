@@ -28,6 +28,7 @@ script = ExtResource("1_ir15t")
 start_level_scene = ExtResource("2_ca42v")
 end_level_scene = ExtResource("3_rysoc")
 level_scenes = Array[PackedScene]([ExtResource("4_ssvqc"), ExtResource("5_264po"), ExtResource("6_1kice"), ExtResource("7_5newe"), ExtResource("8_37s47"), ExtResource("9_bt5mj"), ExtResource("10_e1j6l")])
+test_level_scenes = Array[PackedScene]([ExtResource("4_ssvqc"), ExtResource("4_ssvqc")])
 
 [node name="PauseMenu" parent="." instance=ExtResource("16_ca42v")]
 

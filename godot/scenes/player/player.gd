@@ -12,6 +12,8 @@ enum PlayerState {
 	HITTED
 }
 
+
+
 var state : PlayerState = PlayerState.IDLE
 var debug_visible: bool = false
 
@@ -64,6 +66,7 @@ const STEP_INTERVAL := 0.55  # acá! ajustar al ritmo de la animación
 # --- and the others :) ---
 @export var laser_scene: PackedScene
 
+@onready var on_screen: VisibleOnScreenNotifier2D = $OnScreen
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var splat_timer: Timer = $SplatTimer
@@ -73,6 +76,7 @@ const STEP_INTERVAL := 0.55  # acá! ajustar al ritmo de la animación
 @onready var invuln_timer: Timer = $InvulnTimer
 
 func _ready() -> void:
+	on_screen.screen_exited.connect(_on_player_screen_exited)
 	splat_timer.timeout.connect(_on_splat_timer_timeout)
 	hurt_freeze_timer.one_shot = true
 	invuln_timer.one_shot = true
@@ -344,6 +348,14 @@ func _play_sfx(p: AudioStreamPlayer, pmin := 0.98, pmax := 1.02) -> void:
 	if p == null: return
 	p.pitch_scale = randf_range(pmin, pmax)  # leve variación para que no suene “igual”
 	p.play()
+
+func _on_player_screen_exited() -> void:
+	print("player salió de viewport")
+	var p := GameManager.first_respawn()
+	if p != Vector2.ZERO:
+		global_position = p
+		velocity = Vector2.ZERO
+		state = PlayerState.IDLE
 
 func add_animation() -> void:
 	# flip por orientación

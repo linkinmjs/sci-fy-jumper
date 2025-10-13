@@ -310,9 +310,6 @@ position = Vector2(0, -12)
 scale = Vector2(1.21732, 0.979249)
 shape = SubResource("RectangleShape2D_dovo2")
 
-[node name="SplatTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="DebugLabel" type="Label" parent="."]
 visible = false
 offset_left = -15.0
@@ -338,6 +335,9 @@ one_shot = true
 [node name="InvulnTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="SplatTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="SFX" type="Node" parent="."]
 
 [node name="HitHurt" type="AudioStreamPlayer" parent="SFX"]
@@ -356,3 +356,5 @@ bus = &"SFX"
 stream = ExtResource("7_0owmy")
 volume_db = 15.0
 bus = &"SFX"
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="."]

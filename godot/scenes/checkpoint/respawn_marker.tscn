@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqfa3ukj1ofcw"]
+
+[ext_resource type="Script" uid="uid://bm4dsxipwpujm" path="res://scenes/checkpoint/respawn_marker.gd" id="1_5gj50"]
+
+[node name="RespawnMarker" type="Marker2D"]
+script = ExtResource("1_5gj50")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
