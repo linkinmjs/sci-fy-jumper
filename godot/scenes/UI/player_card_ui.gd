@@ -6,6 +6,7 @@ extends Node2D
 func _ready() -> void:
 	GameManager.laser_is_shooted.connect(decrese_energy)
 	GameManager.player_is_hitted.connect(decrese_life)
+	GameManager.restart_game.connect(restart_card)
 
 func decrese_energy() -> void:
 	var actual_frame = energy.frame
@@ -19,3 +20,7 @@ func decrese_life() -> void:
 	health.set_frame(actual_frame+1)
 	if GameManager.actual_life <= 0:
 		health.hide()
+
+func restart_card() -> void:
+	health.set_frame(0)
+	energy.set_frame(0)
