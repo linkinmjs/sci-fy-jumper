@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0xni0ofe0vm6"]
+[gd_scene load_steps=8 format=3 uid="uid://c0xni0ofe0vm6"]
 
 [ext_resource type="Script" uid="uid://bo5xrcf1536m2" path="res://scenes/game_over_menu.gd" id="1_cwb3k"]
 [ext_resource type="FontFile" uid="uid://c2tbfsgwn6mcv" path="res://assets/fonts/Chemical Superior.otf" id="2_ccgoi"]
+[ext_resource type="Script" uid="uid://c4xg5ramaps0y" path="res://scenes/UI/game_over_score_label.gd" id="3_81acl"]
 [ext_resource type="AudioStream" uid="uid://2teyso7ydjqf" path="res://assets/audios/music/game-over-music.mp3" id="3_ccgoi"]
 
 [sub_resource type="Animation" id="Animation_ccgoi"]
@@ -79,6 +80,7 @@ layout_mode = 2
 text = "Score: 0000000"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("3_81acl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

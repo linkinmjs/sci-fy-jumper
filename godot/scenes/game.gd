@@ -11,11 +11,23 @@ extends Node2D
 @onready var game_music: AudioStreamPlayer = $Audios/GameMusic
 
 const LEVEL_WIDTH: int = 576
+var scoring: bool = false
 
 func _ready() -> void:
 	level_number = GameManager.actual_level
 	game_music.play(0.0)
 	build_level(level_number)
+
+func _process(delta: float) -> void:
+	add_score()
+
+func add_score() -> void:
+	if scoring:
+		return
+	scoring = true
+	await get_tree().create_timer(1).timeout
+	GameManager.add_score(100)
+	scoring = false
 
 func build_level(level_num: int) -> void:
 	# 1) limpiar nivel

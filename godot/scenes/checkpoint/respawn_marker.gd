@@ -1,6 +1,5 @@
 extends Marker2D
 
-@onready var respawn: Marker2D = $Respawn
 @onready var on_screen: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 var seen := false
 
