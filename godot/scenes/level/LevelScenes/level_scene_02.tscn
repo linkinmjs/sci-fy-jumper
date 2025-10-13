@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://bolefpb1paqxq"]
+[gd_scene load_steps=4 format=4 uid="uid://bolefpb1paqxq"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_b1t6s"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_hgwk6"]
 [ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="3_ock45"]
-[ext_resource type="PackedScene" uid="uid://3dfvu077tete" path="res://scenes/UI/ui.tscn" id="4_i5xm6"]
-[ext_resource type="PackedScene" uid="uid://ctnmvkv4iauvv" path="res://scenes/player/player.tscn" id="5_lm2rf"]
 
 [node name="LevelScene02" type="TileMapLayer"]
 texture_filter = 1
@@ -40,8 +38,3 @@ position = Vector2(530, 272)
 position = Vector2(306, 283)
 
 [node name="Items" type="Node2D" parent="."]
-
-[node name="UI" parent="." instance=ExtResource("4_i5xm6")]
-
-[node name="Player" parent="." instance=ExtResource("5_lm2rf")]
-position = Vector2(90, 275)
