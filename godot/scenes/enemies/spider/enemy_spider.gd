@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@onready var player_node: CharacterBody2D = get_parent().get_node("Player")
 @onready var sprite: Node2D = $pivot
 @onready var animated_sprite_2d: AnimatedSprite2D = $pivot/AnimatedSprite2D
 

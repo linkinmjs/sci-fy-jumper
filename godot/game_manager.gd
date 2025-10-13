@@ -1,6 +1,6 @@
 extends Node
 
-var actual_life: int = 1
+var actual_life: int = 10
 var actual_energy: int = 5
 var actual_level: int = 1
 var score: int = 0
