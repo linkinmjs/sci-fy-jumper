@@ -15,6 +15,7 @@ var scoring: bool = false
 
 func _ready() -> void:
 	level_number = GameManager.actual_level
+	GameManager.can_add_scores = true
 	game_music.play(0.0)
 	build_level(level_number)
 

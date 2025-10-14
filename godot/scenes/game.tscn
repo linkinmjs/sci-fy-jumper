@@ -43,7 +43,6 @@ curve = SubResource("Curve2D_qkmgm")
 rotates = false
 loop = false
 script = ExtResource("12_bhx41")
-velocity = 15
 
 [node name="Camera2D" type="Camera2D" parent="PathCamera/PathFollow2D"]
 

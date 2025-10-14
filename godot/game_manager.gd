@@ -3,7 +3,9 @@ extends Node
 var actual_life: int = 10
 var actual_energy: int = 5
 var actual_level: int = 1
+
 var score: int = 0
+var can_add_scores: bool = false
 
 var respawns: Array[Vector2] = []
 
@@ -11,6 +13,7 @@ signal player_is_hitted
 signal laser_is_shooted
 signal adding_score
 signal restart_game
+signal changel_level
 
 func hit_player() -> void:
 	if actual_life == 1:
@@ -37,8 +40,16 @@ func first_respawn() -> Vector2:
 		return Vector2.ZERO
 
 func add_score(points: int) -> void:
+	if not can_add_scores:
+		return
 	score += points
 	emit_signal("adding_score")
+
+func change_next_level() -> void:
+	actual_level += 1
+	get_tree().reload_current_scene()
+	emit_signal("changel_level")
+	pass
 
 func restart_stats() -> void:
 	emit_signal("restart_game")
