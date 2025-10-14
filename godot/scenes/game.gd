@@ -3,7 +3,6 @@ extends Node2D
 @export var start_level_scene: PackedScene
 @export var end_level_scene: PackedScene
 @export var level_scenes: Array[PackedScene]
-@export var test_level_scenes: Array[PackedScene]
 @export var level_number: int = 1
 
 @onready var complete_level_node: Node2D = $Level
@@ -39,11 +38,11 @@ func build_level(level_num: int) -> void:
 		
 	# 2) seleccionar escenas
 	# Nota: con cantidad acorde al nivel
-	var available: int = test_level_scenes.size()
+	var available: int = level_scenes.size()
 	var pick_count: int = clamp(level_num + 1, 0, available)
 	
 	# 3) obtener escenas
-	var pool: Array[PackedScene] = test_level_scenes.duplicate()
+	var pool: Array[PackedScene] = level_scenes.duplicate()
 	pool.shuffle()
 	var selected: Array[PackedScene]
 	for i in range(pick_count):
