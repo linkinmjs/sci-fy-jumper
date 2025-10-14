@@ -9,6 +9,8 @@ extends Node2D
 @onready var complete_level_node: Node2D = $Level
 @onready var path_camera: Path2D = $PathCamera
 @onready var game_music: AudioStreamPlayer = $Audios/GameMusic
+@onready var camera_path_follow: PathFollow2D = $PathCamera/PathFollow2D
+
 
 const LEVEL_WIDTH: int = 576
 var scoring: bool = false

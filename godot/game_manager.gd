@@ -47,6 +47,8 @@ func add_score(points: int) -> void:
 
 func change_next_level() -> void:
 	actual_level += 1
+	actual_energy = 5
+	actual_life = 10
 	get_tree().reload_current_scene()
 	emit_signal("changel_level")
 	pass
