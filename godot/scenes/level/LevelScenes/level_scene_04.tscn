@@ -1,8 +1,54 @@
-[gd_scene load_steps=2 format=4 uid="uid://b7ok13pikdj1r"]
+[gd_scene load_steps=6 format=4 uid="uid://b7ok13pikdj1r"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_bqryf"]
+[ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="2_dq8i1"]
+[ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_qjmwm"]
+[ext_resource type="Texture2D" uid="uid://dntcl2xqscm7o" path="res://assets/Backgrounds/background02.png" id="4_dv0tu"]
+[ext_resource type="PackedScene" uid="uid://q7gh7eyb1dit" path="res://scenes/traps/trap_fire.tscn" id="5_dq8i1"]
 
 [node name="LevelScene04" type="TileMapLayer"]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD//xIAAAABAAAAAAAAABIAAAABAAAAAAABABMAAAABAAEAAAACABMAAAACAAEAAAAgABMAAAAAAAEAAAAhABMAAAABAAEAAAAiABMAAAABAAEAAAAjABMAAAABAAEAAAAjABIAAAABAAAAAAAkABIAAAACAAAAAAACABQAAAACAAIAAAACABIAAAACAAAAAAABABQAAAABAAIAAAABABIAAAABAAAAAAAAABQAAAABAAIAAAAAABMAAAABAAEAAAD//xQAAAABAAIAAAD//xMAAAABAAEAAAAkABQAAAACAAIAAAAkABMAAAACAAEAAAAjABQAAAABAAIAAAAiABQAAAABAAIAAAAiABIAAAABAAAAAAAhABQAAAABAAIAAAAhABIAAAABAAAAAAAgABQAAAAAAAIAAAAgABIAAAAAAAAAAAD+/xQAAAAAAAIAAAD+/xMAAAAAAAEAAAD+/xIAAAAAAAAAAAAKAAwAAAAIAAMAAAAJAAwAAAAHAAMAAAAIAAwAAAAGAAMAAAAZAAwAAAAIAAMAAAAYAAwAAAAHAAMAAAAXAAwAAAAGAAMAAAA=")
+tile_map_data = PackedByteArray("AAD//xIAAAABAAAAAAAAABIAAAABAAAAAAABABMAAAABAAEAAAACABMAAAACAAEAAAAgABMAAAAAAAEAAAAhABMAAAABAAEAAAAiABMAAAABAAEAAAAjABMAAAABAAEAAAAjABIAAAABAAAAAAAkABIAAAABAAAAAAACABQAAAACAAIAAAACABIAAAACAAAAAAABABQAAAABAAIAAAABABIAAAABAAAAAAAAABQAAAABAAIAAAAAABMAAAABAAEAAAD//xQAAAABAAIAAAD//xMAAAABAAEAAAAkABQAAAABAAIAAAAkABMAAAABAAEAAAAjABQAAAABAAIAAAAiABQAAAABAAIAAAAiABIAAAABAAAAAAAhABQAAAABAAIAAAAhABIAAAABAAAAAAAgABQAAAAAAAIAAAAgABIAAAAAAAAAAAAKAAwAAAAIAAMAAAAJAAwAAAAHAAMAAAAIAAwAAAAGAAMAAAAZAAwAAAAIAAMAAAAYAAwAAAAHAAMAAAAXAAwAAAAGAAMAAAA=")
 tile_set = ExtResource("1_bqryf")
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="RespawnMarker" parent="Checkpoints" instance=ExtResource("2_dq8i1")]
+position = Vector2(25, 273)
+
+[node name="RespawnMarker2" parent="Checkpoints" instance=ExtResource("2_dq8i1")]
+position = Vector2(152, 184)
+
+[node name="RespawnMarker3" parent="Checkpoints" instance=ExtResource("2_dq8i1")]
+position = Vector2(392, 186)
+
+[node name="RespawnMarker4" parent="Checkpoints" instance=ExtResource("2_dq8i1")]
+position = Vector2(546, 279)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemySpider" parent="Enemies" instance=ExtResource("3_qjmwm")]
+position = Vector2(392, 189)
+
+[node name="Enviroment" type="Node2D" parent="."]
+z_index = -1
+
+[node name="Background02" type="Sprite2D" parent="Enviroment"]
+position = Vector2(280, 159)
+texture = ExtResource("4_dv0tu")
+
+[node name="TrapFire" parent="Enviroment" instance=ExtResource("5_dq8i1")]
+position = Vector2(121, 323)
+wait_time_activation = 10.0
+
+[node name="TrapFire2" parent="Enviroment" instance=ExtResource("5_dq8i1")]
+position = Vector2(266, 324)
+wait_time_activation = 8.5
+
+[node name="TrapFire3" parent="Enviroment" instance=ExtResource("5_dq8i1")]
+position = Vector2(342, 324)
+wait_time_activation = 11.0
+
+[node name="TrapFire4" parent="Enviroment" instance=ExtResource("5_dq8i1")]
+position = Vector2(421, 324)
+wait_time_activation = 7.0

@@ -350,6 +350,8 @@ func _play_sfx(p: AudioStreamPlayer, pmin := 0.98, pmax := 1.02) -> void:
 	p.play()
 
 func _on_player_screen_exited() -> void:
+	if global_position.y <= 0:
+		return
 	_try_enter_hurt()
 	var p := GameManager.first_respawn()
 	if p != Vector2.ZERO:

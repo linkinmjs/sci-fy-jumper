@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://q7gh7eyb1dit"]
+
+[ext_resource type="Texture2D" uid="uid://ctb2th257q0ax" path="res://assets/Traps/Trap2.png" id="1_uesvj"]
+[ext_resource type="Script" uid="uid://ctlfg4hann7j5" path="res://scenes/traps/trap_fire.gd" id="2_wcdh7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d8rx"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(0, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_128in"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(16, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6aob"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(32, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8n0k"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(64, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awovy"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(80, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbyly"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(96, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r76q3"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(112, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfk4x"]
+atlas = ExtResource("1_uesvj")
+region = Rect2(128, 0, 16, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ustqj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d8rx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_128in")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6aob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8n0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awovy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbyly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r76q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfk4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d8rx")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 15.0
+}]
+
+[node name="TrapFire" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(1, -19)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_ustqj")
+animation = &"activate"
+script = ExtResource("2_wcdh7")
+
+[node name="ActivationTimer" type="Timer" parent="."]
+autostart = true
