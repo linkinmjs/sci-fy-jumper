@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://by3b566k70xxo"]
+[gd_scene load_steps=11 format=4 uid="uid://by3b566k70xxo"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_kn4wh"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_lc5hn"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bl3vxalml3gsc" path="res://assets/Backgrounds/background04.png" id="4_lc5hn"]
 [ext_resource type="PackedScene" uid="uid://215y81ycy281" path="res://scenes/items/crystal.tscn" id="4_w4rl7"]
 [ext_resource type="Texture2D" uid="uid://73kc5fo8d0rw" path="res://assets/Tileset/Tileset_details.png" id="6_0fjl7"]
-[ext_resource type="PackedScene" uid="uid://ctnmvkv4iauvv" path="res://scenes/player/player.tscn" id="6_pq4p8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye6ps"]
 atlas = ExtResource("6_0fjl7")
@@ -80,6 +79,3 @@ texture = SubResource("AtlasTexture_pq4p8")
 [node name="Sprite2D4" type="Sprite2D" parent="Details"]
 position = Vector2(429, 303)
 texture = SubResource("AtlasTexture_0fjl7")
-
-[node name="Player" parent="." instance=ExtResource("6_pq4p8")]
-position = Vector2(162, 93)
