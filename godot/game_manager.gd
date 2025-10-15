@@ -12,6 +12,7 @@ var respawns: Array[Vector2] = []
 var show_tutorial: bool = true
 
 signal player_is_hitted
+signal player_is_splatted
 signal laser_is_shooted
 signal adding_score
 signal restart_game
@@ -22,6 +23,9 @@ func hit_player() -> void:
 		get_tree().change_scene_to_file("res://scenes/game_over_menu.tscn")
 	emit_signal("player_is_hitted")
 	actual_life -= 1
+
+func splat_player() -> void:
+	emit_signal("player_is_splatted")
 
 func shoot_laser() -> void:
 	emit_signal("laser_is_shooted")

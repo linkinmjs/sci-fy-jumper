@@ -253,6 +253,7 @@ func handle_state(_delta: float) -> void:
 	if landed_this_frame and state in [PlayerState.FALLING, PlayerState.JUMPING]:
 		if impact_speed_y > SPLAT_IMPACT_THRESHOLD:
 			state = PlayerState.SPLAT
+			GameManager.splat_player()
 			velocity = Vector2.ZERO
 			if splat_timer:
 				splat_timer.start()

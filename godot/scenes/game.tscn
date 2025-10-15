@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://chwle8ow87ia8"]
+[gd_scene load_steps=20 format=4 uid="uid://chwle8ow87ia8"]
 
 [ext_resource type="Script" uid="uid://csrqqjykkwiyv" path="res://scenes/game.gd" id="1_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dhnjwkuiy0r83" path="res://scenes/level/LevelScenes/start_level_scene.tscn" id="2_ca42v"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ctnmvkv4iauvv" path="res://scenes/player/player.tscn" id="11_pl11u"]
 [ext_resource type="Script" uid="uid://dn0570fm20fq2" path="res://scenes/camera/path_follow_2d.gd" id="12_bhx41"]
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="13_qnb83"]
+[ext_resource type="Script" uid="uid://blocl8v5wqvv3" path="res://scenes/camera/shaker.gd" id="14_rysoc"]
 [ext_resource type="PackedScene" uid="uid://3dfvu077tete" path="res://scenes/UI/ui.tscn" id="15_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bxj1rck3olkpy" path="res://scenes/UI/pause_menu.tscn" id="16_ca42v"]
 [ext_resource type="AudioStream" uid="uid://dppr8kh6xly6r" path="res://assets/audios/music/game-music.mp3" id="16_rysoc"]
@@ -22,6 +23,10 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2880, 0)
 }
 point_count = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rysoc"]
+noise_type = 3
+frequency = 0.5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ir15t")
@@ -44,6 +49,13 @@ loop = false
 script = ExtResource("12_bhx41")
 
 [node name="Camera2D" type="Camera2D" parent="PathCamera/PathFollow2D"]
+
+[node name="Shaker" type="Node2D" parent="PathCamera/PathFollow2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("14_rysoc")
+camera = NodePath("../Camera2D")
+noise = SubResource("FastNoiseLite_rysoc")
+intensity = 30.0
+max_intensity = 80.0
 
 [node name="Level" type="Node2D" parent="."]
 
