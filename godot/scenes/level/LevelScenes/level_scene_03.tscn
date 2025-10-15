@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=4 uid="uid://b73wtba4unedk"]
+[gd_scene load_steps=10 format=4 uid="uid://b73wtba4unedk"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_egfpb"]
 [ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="2_hekv0"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_eyey3"]
 [ext_resource type="Texture2D" uid="uid://dntcl2xqscm7o" path="res://assets/Backgrounds/background02.png" id="4_wlxnr"]
+[ext_resource type="Texture2D" uid="uid://73kc5fo8d0rw" path="res://assets/Tileset/Tileset_details.png" id="5_eyey3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlxnr"]
+atlas = ExtResource("5_eyey3")
+region = Rect2(165, 2, 57, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khb72"]
+atlas = ExtResource("5_eyey3")
+region = Rect2(244, 34, 22, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmm3b"]
+atlas = ExtResource("5_eyey3")
+region = Rect2(112, 135, 16, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6coxk"]
+atlas = ExtResource("5_eyey3")
+region = Rect2(113, 116, 30, 12)
 
 [node name="LevelScene03" type="TileMapLayer"]
 texture_filter = 1
@@ -44,3 +61,21 @@ z_index = -1
 [node name="Background02" type="Sprite2D" parent="Enviroment"]
 position = Vector2(280, 159)
 texture = ExtResource("4_wlxnr")
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Details"]
+position = Vector2(248, 310)
+texture = SubResource("AtlasTexture_wlxnr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Details"]
+position = Vector2(508, 292)
+texture = SubResource("AtlasTexture_khb72")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Details"]
+position = Vector2(271, 146)
+texture = SubResource("AtlasTexture_qmm3b")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Details"]
+position = Vector2(88, 49)
+texture = SubResource("AtlasTexture_6coxk")

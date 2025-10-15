@@ -1,9 +1,26 @@
-[gd_scene load_steps=5 format=4 uid="uid://sm5lkggwc8b5"]
+[gd_scene load_steps=10 format=4 uid="uid://sm5lkggwc8b5"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_iqw0m"]
 [ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="4_qswx5"]
+[ext_resource type="Texture2D" uid="uid://73kc5fo8d0rw" path="res://assets/Tileset/Tileset_details.png" id="5_6a4vj"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="5_8vbtv"]
 [ext_resource type="Texture2D" uid="uid://c0cmfq7a46uhp" path="res://assets/Backgrounds/background05.png" id="6_7vn1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqqgw"]
+atlas = ExtResource("5_6a4vj")
+region = Rect2(165, 2, 57, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pim6i"]
+atlas = ExtResource("5_6a4vj")
+region = Rect2(274, 0, 26, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qswx5"]
+atlas = ExtResource("5_6a4vj")
+region = Rect2(112, 135, 16, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vbtv"]
+atlas = ExtResource("5_6a4vj")
+region = Rect2(113, 116, 30, 12)
 
 [node name="LevelSceneTest" type="TileMapLayer"]
 texture_filter = 1
@@ -47,3 +64,24 @@ z_index = -1
 [node name="Background05" type="Sprite2D" parent="Background"]
 position = Vector2(288, 163)
 texture = ExtResource("6_7vn1g")
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Details"]
+position = Vector2(353, 247)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_sqqgw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Details"]
+position = Vector2(493, 213)
+texture = SubResource("AtlasTexture_pim6i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Details"]
+position = Vector2(94, 138)
+rotation = 4.71239
+texture = SubResource("AtlasTexture_qswx5")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Details"]
+position = Vector2(517, 137)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_8vbtv")

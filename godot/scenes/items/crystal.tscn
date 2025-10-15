@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://215y81ycy281"]
+
+[ext_resource type="Texture2D" uid="uid://tfj4ef51mclx" path="res://assets/Objects/Items.png" id="1_kemuw"]
+[ext_resource type="Script" uid="uid://crgedalvbok7m" path="res://scenes/items/crystal.gd" id="2_55jno"]
+[ext_resource type="AudioStream" uid="uid://b5nbse4u2k7kn" path="res://assets/audios/sfx/powerUp.wav" id="3_7bw2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm2rf"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr5g7"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otfhh"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvaa5"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rui1k"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn8xe"]
+atlas = ExtResource("1_kemuw")
+region = Rect2(96, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fakyv"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_lm2rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr5g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otfhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvaa5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rui1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn8xe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6octq"]
+radius = 7.07107
+
+[sub_resource type="Animation" id="Animation_55jno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kemuw"]
+resource_name = "idle_scale"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0904529, 0.188887),
+"transitions": PackedFloat32Array(1.93187, 0.287175, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7bw2m"]
+_data = {
+&"RESET": SubResource("Animation_55jno"),
+&"idle_scale": SubResource("Animation_kemuw")
+}
+
+[node name="Crystal" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_fakyv")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.786245
+script = ExtResource("2_55jno")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6octq")
+debug_color = Color(0.595364, 0.600429, 0.889031, 0.42)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7bw2m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7bw2m")
+}
+autoplay = "idle_scale"

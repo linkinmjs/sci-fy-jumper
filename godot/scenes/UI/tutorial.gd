@@ -17,4 +17,3 @@ func _on_body_entered(_body: Node2D) -> void:
 		tile_map_layer.show()
 		animation_player.play("turn_off")
 		GameManager.show_tutorial = false
-		

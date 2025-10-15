@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=4 uid="uid://bolefpb1paqxq"]
+[gd_scene load_steps=9 format=4 uid="uid://bolefpb1paqxq"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_b1t6s"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="3_hgwk6"]
 [ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="3_ock45"]
 [ext_resource type="Texture2D" uid="uid://c0cmfq7a46uhp" path="res://assets/Backgrounds/background05.png" id="4_hgwk6"]
+[ext_resource type="PackedScene" uid="uid://215y81ycy281" path="res://scenes/items/crystal.tscn" id="5_i5xm6"]
+[ext_resource type="Texture2D" uid="uid://73kc5fo8d0rw" path="res://assets/Tileset/Tileset_details.png" id="5_lm2rf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr5g7"]
+atlas = ExtResource("5_lm2rf")
+region = Rect2(272, 112, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otfhh"]
+atlas = ExtResource("5_lm2rf")
+region = Rect2(165, 22, 37, 23)
 
 [node name="LevelScene02" type="TileMapLayer"]
 texture_filter = 1
@@ -44,3 +54,19 @@ z_index = -1
 [node name="Background05" type="Sprite2D" parent="Enviroment"]
 position = Vector2(285, 175)
 texture = ExtResource("4_hgwk6")
+
+[node name="Details" type="Node2D" parent="."]
+position = Vector2(448, 151)
+
+[node name="Sprite2D" type="Sprite2D" parent="Details"]
+position = Vector2(-417, 52)
+texture = SubResource("AtlasTexture_rr5g7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Details"]
+position = Vector2(-184, -14)
+texture = SubResource("AtlasTexture_otfhh")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Crystal" parent="Items" instance=ExtResource("5_i5xm6")]
+position = Vector2(448, 151)

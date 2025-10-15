@@ -1,9 +1,30 @@
-[gd_scene load_steps=5 format=4 uid="uid://pw0wlrsu3uev"]
+[gd_scene load_steps=11 format=4 uid="uid://pw0wlrsu3uev"]
 
 [ext_resource type="TileSet" uid="uid://cmcjrke8ny5wf" path="res://sources/tileset.tres" id="1_2qb3n"]
 [ext_resource type="PackedScene" uid="uid://bqfa3ukj1ofcw" path="res://scenes/checkpoint/respawn_marker.tscn" id="4_pkkrh"]
+[ext_resource type="Texture2D" uid="uid://73kc5fo8d0rw" path="res://assets/Tileset/Tileset_details.png" id="5_c4oun"]
 [ext_resource type="PackedScene" uid="uid://pi8waxc4c7bo" path="res://scenes/enemies/spider/enemy_spider.tscn" id="5_k1duq"]
 [ext_resource type="Texture2D" uid="uid://bl3vxalml3gsc" path="res://assets/Backgrounds/background04.png" id="6_dtm8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtm8o"]
+atlas = ExtResource("5_c4oun")
+region = Rect2(80, 1, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkkrh"]
+atlas = ExtResource("5_c4oun")
+region = Rect2(3, 22, 44, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1duq"]
+atlas = ExtResource("5_c4oun")
+region = Rect2(112, 135, 16, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q75ow"]
+atlas = ExtResource("5_c4oun")
+region = Rect2(113, 116, 30, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4oun"]
+atlas = ExtResource("5_c4oun")
+region = Rect2(240, 1, 32, 30)
 
 [node name="LevelScene06" type="TileMapLayer"]
 texture_filter = 1
@@ -56,3 +77,37 @@ z_index = -1
 [node name="Background04" type="Sprite2D" parent="Background"]
 position = Vector2(288, 163)
 texture = ExtResource("6_dtm8o")
+
+[node name="Details" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Details"]
+position = Vector2(299, 163)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_dtm8o")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Details"]
+position = Vector2(279, 218)
+texture = SubResource("AtlasTexture_pkkrh")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Details"]
+position = Vector2(376, 218)
+texture = SubResource("AtlasTexture_pkkrh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Details"]
+position = Vector2(206, 185)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_k1duq")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Details"]
+position = Vector2(156, 152)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_k1duq")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Details"]
+position = Vector2(451, 150)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_q75ow")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Details"]
+position = Vector2(423, 149)
+texture = SubResource("AtlasTexture_c4oun")
