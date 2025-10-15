@@ -17,7 +17,7 @@ var scoring: bool = false
 func _ready() -> void:
 	level_number = GameManager.actual_level
 	GameManager.can_add_scores = true
-	game_music.play(0.0)
+	fade_in_audio(0.15)
 	build_level(level_number)
 
 func _process(delta: float) -> void:
@@ -27,7 +27,7 @@ func add_score() -> void:
 	if scoring:
 		return
 	scoring = true
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1).timeout # Pulsos del scoring
 	GameManager.add_score(100)
 	scoring = false
 
@@ -54,7 +54,7 @@ func build_level(level_num: int) -> void:
 	sequence.append_array(selected)
 	sequence.append(end_level_scene)
 	
-	# 5) instanciar niveles
+	# 5) instanciar niveles uno al lado del otro
 	var lvl_scene_position = 0
 	for chunk in sequence:
 		var lvl_scene: TileMapLayer = chunk.instantiate()
@@ -66,3 +66,11 @@ func build_level(level_num: int) -> void:
 	var last_point_position_x = (lvl_scene_position - 1) * LEVEL_WIDTH
 	var last_point_position = Vector2(last_point_position_x,0)
 	path_camera.curve.set_point_position(1,last_point_position)
+
+func fade_in_audio(fade_duration: float = 2.0) -> void:
+	game_music.volume_db = -80.0 # Bajo volumen
+	game_music.play()
+	
+	var tween = create_tween()
+	tween.tween_property(game_music, "volume_db", 0.0, fade_duration)
+	

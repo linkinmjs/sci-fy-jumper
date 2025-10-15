@@ -13,7 +13,8 @@ tile_map_data = PackedByteArray("AAAFABMAAAABAAsAAAAFABIAAAABAAoAAAAEABMAAAAAAAs
 tile_set = ExtResource("1_l34y5")
 
 [node name="ExitDoor" parent="." instance=ExtResource("2_ixjvy")]
-position = Vector2(503, 271)
+z_index = -1
+position = Vector2(503, 273)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
@@ -34,7 +35,7 @@ texture = ExtResource("5_hveij")
 [node name="TrapFire" parent="Enviroment" instance=ExtResource("6_hveij")]
 position = Vector2(367, 77)
 rotation = 1.5708
-wait_time_activation = 9.5
+wait_time_activation = 7.5
 
 [node name="TrapFire2" parent="Enviroment" instance=ExtResource("6_hveij")]
 position = Vector2(367, 86)

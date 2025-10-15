@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=4 uid="uid://vh8g62sps12s"]
+
+[ext_resource type="Script" uid="uid://bkh2qpn0u2wdn" path="res://scenes/UI/tutorial.gd" id="1_7h4a3"]
+[ext_resource type="TileSet" uid="uid://76g181rh3hvl" path="res://sources/tileset_ui.tres" id="1_y1uxg"]
+[ext_resource type="Theme" uid="uid://cg6dxqcn23ykd" path="res://sources/tutorial-label-theme.tres" id="2_8lsiq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lsiq"]
+size = Vector2(284, 255)
+
+[sub_resource type="Animation" id="Animation_7h4a3"]
+resource_name = "turn_off"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8.25, 8.5, 8.75, 9, 9.25, 9.5, 9.75, 10),
+"transitions": PackedFloat32Array(1, 4.75683, 0.307786, 2.46229, 0.25, 3.605, 0.233258, 4.75683, 0.210224),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_blqdf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blqdf"]
+_data = {
+&"RESET": SubResource("Animation_blqdf"),
+&"turn_off": SubResource("Animation_7h4a3")
+}
+
+[node name="TutorialFirstTime" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7h4a3")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+tile_map_data = PackedByteArray("AAAGAAYAAAABAAwAAAAGAAUAAAABAAwAAAAGAAQAAAABAAwAAAAGAAMAAAABAAwAAAAGAAIAAAABAAwAAAAGAAEAAAABAAwAAAAGAAAAAAABAAwAAAAFAAYAAAABAAwAAAAFAAUAAAABAAwAAAAFAAQAAAABAAwAAAAFAAMAAAABAAwAAAAFAAIAAAABAAwAAAAFAAEAAAABAAwAAAAFAAAAAAABAAwAAAAEAAYAAAABAAwAAAAEAAUAAAABAAwAAAAEAAQAAAABAAwAAAAEAAMAAAABAAwAAAAEAAIAAAABAAwAAAAEAAEAAAABAAwAAAAEAAAAAAABAAwAAAADAAYAAAABAAwAAAADAAUAAAABAAwAAAADAAQAAAABAAwAAAADAAMAAAABAAwAAAADAAIAAAABAAwAAAADAAEAAAABAAwAAAADAAAAAAABAAwAAAACAAYAAAABAAwAAAACAAUAAAABAAwAAAACAAQAAAABAAwAAAACAAMAAAABAAwAAAACAAIAAAABAAwAAAACAAEAAAABAAwAAAACAAAAAAABAAwAAAABAAYAAAABAAwAAAABAAUAAAABAAwAAAABAAQAAAABAAwAAAABAAMAAAABAAwAAAABAAIAAAABAAwAAAABAAEAAAABAAwAAAABAAAAAAABAAwAAAAAAAYAAAABAAwAAAAAAAUAAAABAAwAAAAAAAQAAAABAAwAAAAAAAMAAAABAAwAAAAAAAIAAAABAAwAAAAAAAEAAAABAAwAAAAAAAAAAAABAAwAAAAGAAkAAAABAAwAAAAGAAgAAAABAAwAAAAGAAcAAAABAAwAAAAFAAkAAAABAAwAAAAFAAgAAAABAAwAAAAFAAcAAAABAAwAAAAEAAkAAAABAAwAAAAEAAgAAAABAAwAAAAEAAcAAAABAAwAAAADAAkAAAABAAwAAAADAAgAAAABAAwAAAADAAcAAAABAAwAAAACAAkAAAABAAwAAAACAAgAAAABAAwAAAACAAcAAAABAAwAAAABAAkAAAABAAwAAAABAAgAAAABAAwAAAABAAcAAAABAAwAAAAAAAkAAAABAAwAAAAAAAgAAAABAAwAAAAAAAcAAAABAAwAAAAGAP//AAABAAgAAAAFAP//AAABAAgAAAAEAP//AAABAAgAAAADAP//AAABAAgAAAACAP//AAABAAgAAAABAP//AAABAAgAAAAAAP//AAABAAgAAAD//wkAAAAAAAkAAAD//wgAAAAAAAkAAAD//wcAAAAAAAkAAAD//wYAAAAAAAkAAAD//wUAAAAAAAkAAAD//wQAAAAAAAkAAAD//wMAAAAAAAkAAAD//wIAAAAAAAkAAAD//wEAAAAAAAkAAAD//wAAAAAAAAkAAAD/////AAAAAAgAAAAGAAoAAAABAAoAAAAFAAoAAAABAAoAAAAEAAoAAAABAAoAAAADAAoAAAABAAoAAAACAAoAAAABAAoAAAABAAoAAAABAAoAAAAAAAoAAAABAAoAAAD//woAAAAAAAoAAAAHAAoAAAACAAoAAAAHAAkAAAACAAkAAAAHAAgAAAACAAkAAAAHAAcAAAACAAkAAAAHAAYAAAACAAkAAAAHAAUAAAACAAkAAAAHAAQAAAACAAkAAAAHAAMAAAACAAkAAAAHAAIAAAACAAkAAAAHAAEAAAACAAkAAAAHAAAAAAACAAkAAAAHAP//AAACAAgAAAA=")
+tile_set = ExtResource("1_y1uxg")
+
+[node name="MarginContainer" type="MarginContainer" parent="TileMapLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TileMapLayer/MarginContainer"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+text = "Space = Jump"
+
+[node name="Label2" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+text = "a = left"
+
+[node name="Label3" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+text = "d = right"
+
+[node name="Label4" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+text = "e = laser"
+
+[node name="EmptySpace" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+theme_override_font_sizes/font_size = 12
+
+[node name="Label7" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+theme_override_font_sizes/font_size = 12
+text = "ammo 6 x level"
+
+[node name="Label6" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+theme_override_font_sizes/font_size = 12
+text = "lifes 10 x level"
+
+[node name="EmptySpace2" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="TileMapLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_8lsiq")
+text = "Good luck"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(58, 98)
+shape = SubResource("RectangleShape2D_8lsiq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blqdf")
+}

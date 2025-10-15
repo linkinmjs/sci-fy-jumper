@@ -9,6 +9,8 @@ var can_add_scores: bool = false
 
 var respawns: Array[Vector2] = []
 
+var show_tutorial: bool = true
+
 signal player_is_hitted
 signal laser_is_shooted
 signal adding_score
@@ -58,4 +60,5 @@ func restart_stats() -> void:
 	actual_life = 10
 	actual_energy = 5
 	actual_level = 1
+	show_tutorial = true
 	score = 0
