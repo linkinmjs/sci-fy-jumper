@@ -17,10 +17,10 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 8.25, 8.5, 8.75, 9, 9.25, 9.5, 9.75, 10),
-"transitions": PackedFloat32Array(1, 4.75683, 0.307786, 2.46229, 0.25, 3.605, 0.233258, 4.75683, 0.210224),
+"times": PackedFloat32Array(0, 0.166667, 8.25, 8.5, 8.75, 9, 9.25, 9.5, 9.75, 10),
+"transitions": PackedFloat32Array(1, 1, 4.75683, 0.307786, 2.46229, 0.25, 3.605, 0.233258, 4.75683, 0.210224),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_blqdf"]

@@ -59,7 +59,7 @@ func _on_area_entered(_area: Area2D) -> void:
 		return
 	life -= 1
 	if life <= 0:
-		die()
+		await die()
 		return
 	
 	var actual_animation := animated_sprite_2d.animation
@@ -74,7 +74,7 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	animated_sprite_2d.play("dying")
 	
-	# --- DESACTIVAR COLISIONES SIN ROMPER EL IMPACTO ACTUAL ---
+	# --- DESACTIVAR COLISIONES! ---
 	# apagar hurtbox (deja de hacer daño)
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
