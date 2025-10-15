@@ -1,56 +1,16 @@
-## TP 1: Juego 2D
+<img width="630" height="500" alt="portada" src="https://github.com/user-attachments/assets/27ebe009-31f1-44a7-80da-a42568d06681" />
 
-Este repositorio sirve entrega del trabajo práctico 1 del trayecto de image campus 2025 de Desarrollo de Videojuegos con Godot.
+# Sci-Fy Jumper
 
-## Como se usa este repositorio
+#### Itch.io link: https://linkinmjs.itch.io/sci-fy-jumper
 
-Pueden crearse tranquilamente un repositorio de cero, pero si quieren tener uno con configuración para subir el juego a itch automáticamente, pueden generar un repositorio a partir de este:
+Sci-Fy Jumper is a fast-paced platformer that blends the precision, charge-to-jump mechanics of Jump King with the relentless flow of an endless runner. Pilot a lone astronaut through shifting stages, time your charged leaps, and keep moving as the world pushes forward. Rack up points, blast foes, and survive as long as you can!
 
-https://github.com/user-attachments/assets/dbf1368c-6b99-4b02-bf84-7b63d299d5db
+<img width="881" height="464" alt="screen-shoot-1" src="https://github.com/user-attachments/assets/d08c1603-16a5-400e-a81d-859a9fc0ef6f" />
 
+## Features
 
-## Como subir para que se pueda jugar en itch automáticamente
-
-### Paso 1
-
-Crear el proyecto en itch
-
-   <img height="300" alt="image" src="https://github.com/user-attachments/assets/289a1dd2-72b3-40af-b76a-81bef6d9212f" />
-
-### Paso 2
-
-Ponerle un título al juego, y configurar el **Kind of project** como HTML
-
-   <img height="600" alt="image" src="https://github.com/user-attachments/assets/12ba7e65-e05a-4106-a8f0-69ce8415a851" />
-
-### Paso 3
-
-Clickear Save & view page
-
-   <img width="631" height="190" alt="image" src="https://github.com/user-attachments/assets/bea9ca55-ddf6-4043-87b3-78b079718dac" />
-
-### Paso 4
-
-Configurar los siguientes secretos en el repositorio (eso es en Settings > Secrets and Variables > Actions, pueden guiarse con el vídeo del principio del README)
-
-   - BUTLER_API_KEY -> lo obtienen aquí: https://itch.io/user/settings/api-keys
-   - ITCHIO_GAME -> nombre de su juego
-   - ITCHIO_USERNAME -> su usuario de itch
-
-### Paso 5
-
-Hacer un commit y un push al repositorio, eso va a disparar una acción que va a exportar su juego y subirlo a itch:
-
-<img width="1910" height="369" alt="image" src="https://github.com/user-attachments/assets/06312139-8854-4d35-8670-552dda17ff6c" />
-
-### Paso 6
-
-Tras subirlo por primera vez, volver a itch, y marcar la opción This file will be played in the browser
-
-Luego de eso, le dan guardar de nuevo.
-
-<img width="627" height="410" alt="image" src="https://github.com/user-attachments/assets/0c5c671d-248e-457c-963e-9144a240f687" />
-
-### ¡Listo!
-
-Ahora, cada vez que hagan un push al repositorio (a la rama principal: `main`), el juego en itch se va actualizar automáticamente.
+- Charge-based jumping with tight, skillful controls
+- Endless-runner momentum meets multi-stage platforming
+- Enemies to shoot down and hazards to outsmart
+- Score chase: climb the leaderboard by surviving and clearing threats
