@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://pi8waxc4c7bo"]
+[gd_scene load_steps=23 format=3 uid="uid://pi8waxc4c7bo"]
 
 [ext_resource type="Script" uid="uid://b78kyha1xxrv7" path="res://scenes/enemies/spider/enemy_spider.gd" id="1_xpp31"]
 [ext_resource type="Texture2D" uid="uid://cike1hcswjpfo" path="res://assets/Enemies/Alien2_fixed.png" id="2_t3dm1"]
@@ -144,6 +144,11 @@ size = Vector2(18, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3g4sx"]
 size = Vector2(24, 17)
 
+[sub_resource type="Curve" id="Curve_xpp31"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(0.961309, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="EnemySpider" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 2
@@ -155,10 +160,8 @@ script = ExtResource("1_xpp31")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pivot"]
 position = Vector2(6, -24)
 sprite_frames = SubResource("SpriteFrames_c8etm")
-animation = &"dying"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -195,3 +198,17 @@ collision_mask = 128
 position = Vector2(16, -8)
 target_position = Vector2(2, 0)
 collision_mask = 128
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -9)
+emitting = false
+amount = 20
+lifetime = 0.15
+one_shot = true
+explosiveness = 0.23
+randomness = 0.95
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 140.0
+initial_velocity_max = 180.0
+angle_curve = SubResource("Curve_xpp31")

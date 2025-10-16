@@ -9,6 +9,8 @@ extends CharacterBody2D
 @onready var rightwallray: RayCast2D = $rightwallray
 @onready var hurtbox: Area2D = $Hurtbox
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
+
 
 @export var life: int = 2
 @export_range(-1, 1) var dir: int = 1
@@ -28,7 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not alive:
 		return
-	
+
 	if hitted:
 		animated_sprite_2d.play("hitted")
 		velocity = Vector2.ZERO
@@ -57,6 +59,7 @@ func _wait_dir_change(desire_dir: int) -> void:
 func _on_area_entered(_area: Area2D) -> void:
 	if not alive:
 		return
+	cpu_particles_2d.emitting = true
 	life -= 1
 	if life <= 0:
 		await die()
